@@ -1,6 +1,23 @@
 const {expect} = require('chai');
 const mdl = require('../index');
 
+describe('#Concept', () => {
+  it('should correctly calculate equality and handling cloning.', () => {
+    const code = new mdl.Concept('urn:x-test:some/namespace', '12345', 'My first code!');
+    const code2 = code.clone();
+    expect(code2.system).to.eql(code.system);
+    expect(code2.code).to.eql(code.code);
+    expect(code2.display).to.eql(code.display);
+    expect(code2.equals(code)).to.be.true;
+
+    code2.display = 'Another name for the code.'
+    expect(code2.equals(code)).to.be.true;
+
+    code2.code = '6789'
+    expect(code2.equals(code)).to.be.false;
+  });
+})
+
 describe('#Value', () => {
   it('should correctly set and get cardinalities', () => {
     // Need to use an subclass of Value to get an instance
