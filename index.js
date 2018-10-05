@@ -1,1 +1,1 @@
-module.exports = require('./lib/modelsCimpl6');
+module.exports = require('./lib/models');
