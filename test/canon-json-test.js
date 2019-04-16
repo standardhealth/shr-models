@@ -102,7 +102,7 @@ describe('#CanonicalJSON.DataElements.core', () => {
 
   it('should correctly generate an entry element with a coded value', () => {
     let de = new simpleDE('shr.test', 'SimpleCoded', true, false)
-         .withValue(new mdl.IdentifiableValue(pid('code')).withMinMax(1, 1));
+         .withValue(new mdl.IdentifiableValue(pid('concept')).withMinMax(1, 1));
 
     let outputJson = de.toJSON();
     let fixtureJson = importDataElementFixture('SimpleCoded');
@@ -216,8 +216,8 @@ describe('#DataElements.constraints', () => {
 
     let de = new mdl.DataElement(id('shr.test', 'CodeConstraintOnField'), true, false)
             .withField(new mdl.IdentifiableValue(id('shr.test', 'Simple')).withMinMax(0, 1))
-            .withField(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(0, 1)
-                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('code')]))
+            .withField(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(0, 1)
+                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -233,7 +233,7 @@ describe('#DataElements.constraints', () => {
     let de = new mdl.DataElement(id('shr.test', 'CodeConstraintOnFieldChild'), true, false)
             .withField(new mdl.IdentifiableValue(id('shr.test', 'Simple')).withMinMax(0, 1))
             .withField(new mdl.IdentifiableValue(id('shr.test', 'CodedFromValueSet')).withMinMax(0, 1)
-                .withConstraint(new mdl.CodeConstraint(defaultCode, [id('shr.test','Coding'), pid('code')]))
+                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -247,8 +247,8 @@ describe('#DataElements.constraints', () => {
     let defaultCode = new mdl.Concept('http://foo.org', 'bar');
 
     let de = new mdl.DataElement(id('shr.test', 'CodeConstraintOnValue'), true, false)
-            .withValue(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(1, 1)
-                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('code')]))
+            .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(1, 1)
+                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -263,7 +263,7 @@ describe('#DataElements.constraints', () => {
 
     let de = new mdl.DataElement(id('shr.test', 'CodeConstraintOnValueChild'), true, false)
             .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedFromValueSet')).withMinMax(1, 1)
-                .withConstraint(new mdl.CodeConstraint(defaultCode, [id('shr.test','Coding'), pid('code')]))
+                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -277,8 +277,8 @@ describe('#DataElements.constraints', () => {
     let defaultCode = new mdl.Concept(null, 'bar');
 
     let de = new mdl.DataElement(id('shr.test', 'SystemlessCodeConstraintOnValue'), true, false)
-            .withValue(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(1, 1)
-                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('code')]))
+            .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(1, 1)
+                .withConstraint(new mdl.CodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -294,8 +294,8 @@ describe('#DataElements.constraints', () => {
     let defaultCode = new mdl.Concept('http://foo.org', 'bar');
 
     let de = new mdl.DataElement(id('shr.test', 'IncludesCodeConstraintOnValue'), true, false)
-            .withValue(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(1)
-                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('code')]))
+            .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(1)
+                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -311,7 +311,7 @@ describe('#DataElements.constraints', () => {
     let de = new mdl.DataElement(id('shr.test', 'IncludesCodeConstraintOnFieldChild'), true, false)
             .withField(new mdl.IdentifiableValue(id('shr.test', 'Simple')).withMinMax(0, 1))
             .withField(new mdl.IdentifiableValue(id('shr.test', 'MultiCodedFromValueSet')).withMinMax(0, 1)
-                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [id('shr.test','Coding'), pid('code')]))
+                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -325,8 +325,8 @@ describe('#DataElements.constraints', () => {
     let defaultCode = new mdl.Concept('http://foo.org', 'bar');
 
     let de = new mdl.DataElement(id('shr.test', 'IncludesCodeConstraintOnValue'), true, false)
-            .withValue(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(1)
-                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('code')]))
+            .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(1)
+                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -341,7 +341,7 @@ describe('#DataElements.constraints', () => {
 
     let de = new mdl.DataElement(id('shr.test', 'IncludesCodeConstraintOnValueChild'), true, false)
             .withValue(new mdl.IdentifiableValue(id('shr.test', 'MultiCodedFromValueSet')).withMinMax(1, 1)
-                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [id('shr.test', 'Coding'), pid('code')]))
+                .withConstraint(new mdl.IncludesCodeConstraint(defaultCode, [pid('concept')]))
             );
 
     let outputJson = de.toJSON();
@@ -480,8 +480,8 @@ describe('#DataElements.constraints', () => {
     let TESTVS = 'http://standardhealthrecord.org/test/vs';
 
     let codedFromVS = new simpleDE('shr.test', 'CodedWithCodeFromValueSet', false, false)
-            .withValue(new mdl.IdentifiableValue(id('shr.test', 'Coding')).withMinMax(1, 1)
-            .withConstraint(new mdl.ValueSetConstraint(`${TESTVS}/Coded`, [pid('code')])));
+            .withValue(new mdl.IdentifiableValue(id('shr.test', 'CodedThing')).withMinMax(1, 1)
+            .withConstraint(new mdl.ValueSetConstraint(`${TESTVS}/Coded`, [pid('concept')])));
 
     let outputJson = codedFromVS.toJSON();
     let fixtureJson = importDataElementFixtureFromPath(['constraints', 'valuesetConstraints'], 'CodedWithCodeFromValueSet');
@@ -493,7 +493,7 @@ describe('#DataElements.constraints', () => {
     let TESTVS = 'http://standardhealthrecord.org/test/vs';
 
     let de = new simpleDE('shr.test', 'CodedFromValueSet', true, false)
-            .withValue(new mdl.IdentifiableValue(pid('code')).withMinMax(1, 1)
+            .withValue(new mdl.IdentifiableValue(pid('concept')).withMinMax(1, 1)
                 .withConstraint(new mdl.ValueSetConstraint(`${TESTVS}/Coded`)));
 
     let outputJson = de.toJSON();
