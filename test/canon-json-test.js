@@ -42,17 +42,6 @@ describe('#CanonicalJSON.DataElements.core', () => {
     expect(outputJson).to.deep.equal(fixtureJson);
   });
 
-  it('should correctly generate a simple element with a reference', () => {
-    let de = new simpleDE('shr.test', 'SimpleReference', true, false)
-            .withValue(new mdl.RefValue(id('shr.test', 'Simple')).withMinMax(1, 1))
-            .withDescription('It is a reference to a simple element');
-
-    let outputJson = de.toJSON();
-    let fixtureJson = importDataElementFixture('SimpleReference');
-
-    expect(outputJson).to.deep.equal(fixtureJson);
-  });
-
   it('should correctly generate an element with a multi-string value', () => {
     let de = new simpleDE('shr.test', 'MultiString', true, false)
             .withDescription('It is a multi-string entry')
